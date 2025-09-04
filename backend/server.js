@@ -8,8 +8,15 @@ const errorHandler = require('./middleware/errorHandler');
 const PORT = process.env.PORT || 3500;
 const cors = require('cors');
 
-// CORS Middleware for all origins
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+// UPDATED CORS Middleware for production
+app.use(cors({ 
+    credentials: true, 
+    origin: [
+        'http://localhost:3000',
+        'https://aidbridge-frontend.vercel.app', // Replace with your actual Vercel URL
+        /\.vercel\.app$/  // Allows any vercel.app subdomain
+    ]
+}));
 
 // Logger Middleware
 app.use(logger);
@@ -22,6 +29,16 @@ app.use(express.urlencoded({ extended: false }));
 
 // Serve static files
 app.use('/', express.static(path.join(__dirname, '/public')));
+
+// ADD: Health check endpoint (for deployment monitoring)
+app.get('/health', (req, res) => {
+    res.status(200).json({ 
+        status: 'OK', 
+        timestamp: new Date().toISOString(),
+        message: 'AidBridge Backend is running!',
+        environment: process.env.NODE_ENV || 'development'
+    });
+});
 
 // Routes
 app.use('/', require('./routes/root'));
@@ -48,6 +65,10 @@ app.use(errorHandler);
 
 app.listen(PORT, async () => {
     console.log(`Server listening on port ${PORT}`);
-    await sequelize.authenticate();
-    console.log('Database connected!');
+    try {
+        await sequelize.authenticate();
+        console.log('Database connected!');
+    } catch (error) {
+        console.error('Database connection failed:', error);
+    }
 });
