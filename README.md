@@ -29,6 +29,14 @@ root/
 │   ├── tailwind.config.js # Tailwind CSS config
 └── README.md       # Project documentation
 ```
+## Screenshots
+<img width="1473" height="868" alt="image" src="https://github.com/user-attachments/assets/bab15357-33aa-4440-99cf-c19fcbc40235" />
+<img width="1485" height="863" alt="image" src="https://github.com/user-attachments/assets/cd553986-3e68-4482-b941-226432c0526d" />
+<img width="1558" height="869" alt="image" src="https://github.com/user-attachments/assets/365300bd-3e5a-4d34-8700-d4fd95827969" />
+<img width="1463" height="866" alt="image" src="https://github.com/user-attachments/assets/7fc800f2-760b-4a85-9027-3b999c16e0fe" />
+
+
+
 
 ---
 
