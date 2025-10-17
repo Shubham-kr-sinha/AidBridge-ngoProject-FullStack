@@ -1,0 +1,163 @@
+
+donors
+{
+    "name": "Anirban Chakrabortty",
+    "pwd": "abcd1234",
+    "address": "Kolkata, West Bengal",
+    "phone_num": "1234567890"
+}
+{
+    "name": "Divyank Roy",
+    "pwd": "abcd1234",
+    "address": "Muzaffarpur, Bihar",
+    "phone_num": "1234567890"
+}
+{
+    "name": "Sam Stewart X",
+    "pwd": "abcd1234",
+    "address": "Trichy, Tamil Nadu",
+    "phone_num": "1234567890"
+}
+{
+    "name": "Aditya Vikram Mahanta",
+    "pwd": "abcd1234",
+    "address": "Guwahati, Assam",
+    "phone_num": "1234567890"
+}
+[
+    {
+        "donor_id": 1,
+        "name": "Anirban Chakrabortty",
+        "address": "Kolkata, West Bengal",
+        "phone_num": "1234567890",
+        "createdAt": "2024-11-11T13:16:54.000Z",
+        "updatedAt": "2024-11-11T13:16:54.000Z"
+    },
+    {
+        "donor_id": 2,
+        "name": "Divyank Roy",
+        "address": "Muzaffarpur, Bihar",
+        "phone_num": "1234567890",
+        "createdAt": "2024-11-11T13:21:57.000Z",
+        "updatedAt": "2024-11-11T13:21:57.000Z"
+    },
+    {
+        "donor_id": 3,
+        "name": "Sam Stewart X",
+        "address": "Trichy, Tamil Nadu",
+        "phone_num": "1234567890",
+        "createdAt": "2024-11-11T13:22:05.000Z",
+        "updatedAt": "2024-11-11T13:22:05.000Z"
+    },
+    {
+        "donor_id": 4,
+        "name": "Aditya Vikram Mahanta",
+        "address": "Guwahati, Assam",
+        "phone_num": "1234567890",
+        "createdAt": "2024-11-12T10:18:10.000Z",
+        "updatedAt": "2024-11-12T10:18:10.000Z"
+    }
+]
+
+items
+{
+    "type": "food",
+    "quality_status": "good",
+    "desc": "5kgs of rice"
+}
+{
+    "type": "gold",
+    "quality_status": "good",
+    "desc": "3grams of 22k gold"
+}
+[
+    {
+        "item_id": 1,
+        "type": "food",
+        "quality_status": "good",
+        "desc": "5kgs of rice",
+        "createdAt": "2024-11-12T10:19:16.000Z",
+        "updatedAt": "2024-11-12T10:19:16.000Z"
+    },
+    {
+        "item_id": 2,
+        "type": "gold",
+        "quality_status": "good",
+        "desc": "3grams of 22k gold",
+        "createdAt": "2024-11-12T10:20:51.000Z",
+        "updatedAt": "2024-11-12T10:20:51.000Z"
+    }
+]
+
+branches
+{
+    "location": "Mumbai, Maharashtra"
+}
+{
+    "location": "Chennai, Tamil Nadu"
+}
+{
+    "location": "Hyderabad, Telangana"
+}
+[
+    {
+        "branch_id": 1,
+        "location": "Mumbai, Maharashtra",
+        "createdAt": "2024-11-12T10:21:14.000Z",
+        "updatedAt": "2024-11-12T10:21:14.000Z"
+    },
+    {
+        "branch_id": 2,
+        "location": "Chennai, Tamil Nadu",
+        "createdAt": "2024-11-12T10:21:32.000Z",
+        "updatedAt": "2024-11-12T10:21:32.000Z"
+    },
+    {
+        "branch_id": 3,
+        "location": "Hyderabad, Telangana",
+        "createdAt": "2024-11-12T10:22:18.000Z",
+        "updatedAt": "2024-11-12T10:22:18.000Z"
+    }
+]
+
+donations
+{
+    "donor_id": "3",
+    "item_id": "1",
+    "date_received": "2024-03-23",
+    "branch_id": "2"
+}
+{
+    "donor_id": "3",
+    "item_id": "2",
+    "date_received": "2024-03-23",
+    "branch_id": "2"
+}
+
+beneficiaries
+{
+    "name": "Vivek Reddy",
+    "address": "Warangal, Telangana"
+}
+{
+    "name": "Shyamala Ravishankar",
+    "address": "Nagpur, Maharashtra"
+}
+[
+    {
+        "beneficiary_id": 1,
+        "name": "Vivek Reddy",
+        "address": "Warangal, Telangana",
+        "phone_num": null,
+        "createdAt": "2024-11-12T10:32:34.000Z",
+        "updatedAt": "2024-11-12T10:32:34.000Z"
+    },
+    {
+        "beneficiary_id": 2,
+        "name": "Shyamala Ravishankar",
+        "address": "Nagpur, Maharashtra",
+        "phone_num": null,
+        "createdAt": "2024-11-12T10:32:55.000Z",
+        "updatedAt": "2024-11-12T10:32:55.000Z"
+    }
+]
