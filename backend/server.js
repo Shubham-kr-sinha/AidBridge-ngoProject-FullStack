@@ -68,7 +68,7 @@ const startServer = async () => {
 
         // If the connection is successful, start the server.
         app.listen(PORT, () => {
-            console.log(Server is live and listening on port ${PORT});
+            console.log(`Server is live and listening on port ${PORT}`);
         });
     } catch (error) {
         // If the database connection fails, log the detailed error and exit.
