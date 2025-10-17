@@ -5,25 +5,36 @@ const path = require('path');
 const { sequelize } = require('./models');
 const logger = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');
-const PORT = process.env.PORT || 3500;
 const cors = require('cors');
 
-// CORS Middleware for all origins
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+// --- CORS Configuration ---
+const allowedOrigins = [
+    'http://localhost:3000',      // For local development
+    process.env.CLIENT_URL        // For your deployed Vercel frontend
+];
 
-// Logger Middleware
+const corsOptions = {
+    origin: (origin, callback) => {
+        // Allow requests if the origin is in our list or if there's no origin (e.g., Postman)
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('This origin is not allowed by CORS.'));
+        }
+    },
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
+// --- Middleware ---
 app.use(logger);
-
-// JSON Middleware - receive and parse JSON data
 app.use(express.json());
-
-// URL Encoded Middleware - receive and parse URL encoded data
 app.use(express.urlencoded({ extended: false }));
-
-// Serve static files
 app.use('/', express.static(path.join(__dirname, '/public')));
 
-// Routes
+// --- API Routes ---
 app.use('/', require('./routes/root'));
 app.use('/auth', require('./routes/authRoutes'));
 app.use('/donors', require('./routes/donorRoutes'));
@@ -33,21 +44,22 @@ app.use('/branches', require('./routes/branchRoutes'));
 app.use('/distributions', require('./routes/distriRoutes'));
 app.use('/beneficiaries', require('./routes/beneRoutes'));
 
-// Handle 404
+// --- 404 Not Found Handler ---
 app.all('/*', (req, res) => {
-    if (req.accepts('html'))
+    res.status(404);
+    if (req.accepts('html')) {
         res.sendFile(path.join(__dirname, 'views', '404.html'));
-    else if (req.accepts('json'))
+    } else if (req.accepts('json')) {
         res.json({ message: '404 Not Found' });
-    else
+    } else {
         res.type('txt').send('404 Not Found');
+    }
 });
 
-// Error Handling
+// --- Global Error Handler ---
 app.use(errorHandler);
 
-app.listen(PORT, async () => {
-    console.log(`Server listening on port ${PORT}`);
-    await sequelize.authenticate();
-    console.log('Database connected!');
-});
+// --- Vercel Export ---
+// This line allows Vercel to use your Express app as a serverless function.
+// The traditional app.listen() is removed for this reason.
+module.exports = app;
