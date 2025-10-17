@@ -6,16 +6,16 @@ const { sequelize } = require('./models');
 const logger = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');
 const cors = require('cors');
+const PORT = process.env.PORT || 3500;
 
 // --- CORS Configuration ---
 const allowedOrigins = [
-    'http://localhost:3000',      // For local development
-    process.env.CLIENT_URL        // For your deployed Vercel frontend
+    'http://localhost:3000',
+    process.env.CLIENT_URL
 ];
 
 const corsOptions = {
     origin: (origin, callback) => {
-        // Allow requests if the origin is in our list or if there's no origin (e.g., Postman)
         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
             callback(null, true);
         } else {
@@ -59,7 +59,24 @@ app.all('/*', (req, res) => {
 // --- Global Error Handler ---
 app.use(errorHandler);
 
-// --- Vercel Export ---
-// This line allows Vercel to use your Express app as a serverless function.
-// The traditional app.listen() is removed for this reason.
-module.exports = app;
+// --- Server Startup with Error Handling ---
+const startServer = async () => {
+    try {
+        // First, try to connect to the database.
+        await sequelize.authenticate();
+        console.log('Database connection has been established successfully. 🐘');
+
+        // If the connection is successful, start the server.
+        app.listen(PORT, () => {
+            console.log(Server is live and listening on port ${PORT});
+        });
+    } catch (error) {
+        // If the database connection fails, log the detailed error and exit.
+        console.error('--- DATABASE CONNECTION FAILED ---');
+        console.error('Unable to connect to the database:', error);
+        process.exit(1); // This ensures Render knows the startup failed.
+    }
+};
+
+// Start the server
+startServer();
