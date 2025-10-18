@@ -25,7 +25,7 @@ module.exports = {
       ssl: {
         require: true,
         rejectUnauthorized: true
-        ca: fs.readFileSync(process.env.CA)
+        
       }
     }
   }
