@@ -1,6 +1,9 @@
 // Load environment variables from the .env file
 require('dotenv').config();
 
+const mysql = require('mysql2');
+const fs = require('fs');
+
 module.exports = {
   // Configuration for your local development machine
   development: {
@@ -22,6 +25,7 @@ module.exports = {
       ssl: {
         require: true,
         rejectUnauthorized: true
+        ca: fs.readFileSync(process.env.CA)
       }
     }
   }
